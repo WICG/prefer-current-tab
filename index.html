@@ -27,19 +27,19 @@
         decision is perennially debated.
       </p>
       <p>
-        Sometimes the only source that makes sense is the current tab. For example, a productivity
-        suite might wish to stream itself to a virtual conference. When such a site calls
+        Consider the case of a productivity suite that wishes to stream itself to a virtual
+        conference. When such an application calls
         <a data-cite="SCREEN-CAPTURE#dom-mediadevices-getdisplaymedia">getDisplayMedia</a>, any
         selection by the user of a source other than the current tab is likely user-error, and the
-        site is likely to discard the resulting {{MediaStream}} rather than use it.
+        application is likely to discard the resulting {{MediaStream}} rather than use it.
       </p>
       <p>
-        What is needed to support such use-cases well is an API that only offers the current tab.
-        Such an API is currently in the works, and its tentative name is
-        <code>getViewportMedia</code>. The main benefit of <code>getViewportMedia</code> is that it
-        will offer the user a confirmation-only dialog. The drawbacks are the long time until this
-        API is be standardized, implemented, and until the security mechanism it requires are widely
-        adopted.
+        In such a case, there is only one capture-source that makes sense - the current tab. An API
+        is required that only offers the current tab. Such an API is currently in the works, and its
+        tentative name is <code>getViewportMedia</code>. The main benefit of
+        <code>getViewportMedia</code> is that it will offer the user a confirmation-only dialog. The
+        drawbacks are the long time until this API is be standardized, implemented, and until the
+        security mechanisms it requires are widely adopted.
       </p>
       <p>
         We propose a simpler mechanism that can act as a stopgap measure until
