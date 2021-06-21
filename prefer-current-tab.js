@@ -2,7 +2,7 @@ var respecConfig = {
   group: "webrtc",
   specStatus: "unofficial",
   github: {
-    repoURL: "https://github.com/eladalon1983/prefer-current-tab/",
+    repoURL: "https://github.com/wicg/prefer-current-tab/",
     branch: "master",
   },
   editors: [
