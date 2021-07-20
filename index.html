@@ -65,10 +65,15 @@
         </dt>
         <dd>
           <p>
-            If <code>true</code>,
-            <a data-cite="SCREEN-CAPTURE#dom-mediadevices-getdisplaymedia">getDisplayMedia</a>
-            SHOULD present the current tab as the most prominent option. If <code>false</code>, no
-            such requirement is made.
+            When {{MediaDevices/getUserMedia()}} is called, if <code>preferCurrentTab</code> is
+            <code>true</code>, return a <a>rejected</a> promise with a {{DOMException}} object whose
+            {{DOMException/name}} attribute has the value {{InvalidStateError}}.
+          </p>
+          <p>
+            When {{MediaDevices/getDisplayMedia()}} is called, if <code>preferCurrentTab</code> is
+            <code>true</code>, the user agent SHOULD present the current tab as the most prominent
+            option. if <code>preferCurrentTab</code> is <code>false</code>, no such requirement is
+            made.
           </p>
         </dd>
       </dl>
