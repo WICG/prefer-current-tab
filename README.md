@@ -9,7 +9,7 @@ However, [getViewportMedia](https://github.com/w3c/mediacapture-screen-share/pul
 We therefore extend [getDisplayMedia](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getDisplayMedia) in a way that allows the application to inform the browser that it prefers the current tab. [getDisplayMedia](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getDisplayMedia) currently accepts a single parameter of type [MediaStreamConstraints](https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamConstraints) (a dictionary). We extend that dictionary with a new member called preferCurrentTab. This new member is a boolean defaulting to false. When set to true, the browser presents the current tab as the most prominent option.
 
 Sample code:
-```
+```js
 navigator.mediaDevices.getDisplayMedia({
     video: true,
     audio: true,
