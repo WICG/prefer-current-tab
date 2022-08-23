@@ -81,10 +81,11 @@
               with a {{DOMException}} object whose {{DOMException/name}} attribute has the value
               {{InvalidStateError}}.
             </li>
-            <li>The user agent SHOULD present the current tab as the most prominent option.</li>
             <li>
               All other steps associated with {{MediaDevices/getDisplayMedia()}} should now be
-              applied.
+              applied. If these steps culminate in the user agent presenting the user with a
+              selection of display surfaces, the user agent SHOULD present the current tab as the
+              most prominent option.
             </li>
           </ol>
         </dd>
