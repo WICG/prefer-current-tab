@@ -73,7 +73,9 @@
               <p>Let <var>constraints</var> be the method's first argument.</p>
             </li>
             <li>
-              If <code>constraints.preferCurrentTab</code> is <code>false</code>, abort these steps.
+              If <code>constraints.preferCurrentTab</code> is <code>false</code>, abort these steps
+              and continue instead with the usual set of steps associated
+              {{MediaDevices/getDisplayMedia()}}.
             </li>
             <li>
               If <code>constraints.</code>{{DisplayMediaStreamConstraints/selfBrowserSurface}} is
@@ -84,8 +86,8 @@
             <li>
               All other steps associated with {{MediaDevices/getDisplayMedia()}} should now be
               applied. If these steps culminate in the user agent presenting the user with a
-              selection of display surfaces, the user agent SHOULD present the current tab as the
-              most prominent option.
+              selection of <a data-cite="SCREEN-CAPTURE#dfn-display-surface">display surfaces</a>,
+              the user agent SHOULD present the current tab as the most prominent option.
             </li>
           </ol>
         </dd>
