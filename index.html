@@ -83,14 +83,13 @@
               newly [=exception/created=] {{TypeError}}.
             </li>
             <li>
-              All other steps associated with
+              The rest of the
               <a href="https://www.w3.org/TR/screen-capture/#dom-mediadevices-getdisplaymedia"
                 >getDisplayMedia algorithm</a
               >
-              should now be applied. If these steps culminate in the user agent presenting the user
-              with a selection of
-              <a data-cite="SCREEN-CAPTURE#dfn-display-surface">display surfaces</a>, the user agent
-              SHOULD present the current tab as the most prominent option.
+              should now be executed, with one change - if the algorithm's execution reaches the
+              step where the user agent asks the user to choose a display surface to capture, then
+              the user agent SHOULD present the current tab as the most prominent option.
             </li>
           </ol>
         </dd>
