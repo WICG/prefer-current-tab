@@ -65,28 +65,31 @@
         </dt>
         <dd>
           <p>
-            When {{MediaDevices/getDisplayMedia()}} is called, the user agent MUST run the following
-            steps:
+            When {{MediaDevices/getDisplayMedia()}} is called with <code>|constraints|</code> (a
+            dictionary), the user agent MUST run the following steps:
           </p>
           <ol>
             <li>
-              <p>Let <var>constraints</var> be the method's first argument.</p>
+              If <code>|constraints|.preferCurrentTab</code> is <code>false</code>, abort these
+              steps and continue instead with the
+              <a href="https://www.w3.org/TR/screen-capture/#dom-mediadevices-getdisplaymedia"
+                >getDisplayMedia algorithm</a
+              >.
             </li>
             <li>
-              If <code>constraints.preferCurrentTab</code> is <code>false</code>, abort these steps
-              and continue instead with the usual set of steps associated
-              {{MediaDevices/getDisplayMedia()}}.
-            </li>
-            <li>
-              If <code>constraints.</code>{{DisplayMediaStreamOptions/selfBrowserSurface}} is
+              If <code>|constraints|.</code>{{DisplayMediaStreamOptions/selfBrowserSurface}} is
               {{SelfCapturePreferenceEnum/"exclude"}}, return a promise [=reject|rejected=] with a
               newly [=exception/created=] {{TypeError}}.
             </li>
             <li>
-              All other steps associated with {{MediaDevices/getDisplayMedia()}} should now be
-              applied. If these steps culminate in the user agent presenting the user with a
-              selection of <a data-cite="SCREEN-CAPTURE#dfn-display-surface">display surfaces</a>,
-              the user agent SHOULD present the current tab as the most prominent option.
+              All other steps associated with
+              <a href="https://www.w3.org/TR/screen-capture/#dom-mediadevices-getdisplaymedia"
+                >getDisplayMedia algorithm</a
+              >
+              should now be applied. If these steps culminate in the user agent presenting the user
+              with a selection of
+              <a data-cite="SCREEN-CAPTURE#dfn-display-surface">display surfaces</a>, the user agent
+              SHOULD present the current tab as the most prominent option.
             </li>
           </ol>
         </dd>
