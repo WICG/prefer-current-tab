@@ -79,9 +79,8 @@
             </li>
             <li>
               If <code>constraints.</code>{{DisplayMediaStreamOptions/selfBrowserSurface}} is
-              {{SelfCapturePreferenceEnum/"exclude"}}, return a promise <a>rejected</a>
-              with a {{DOMException}} object whose {{DOMException/name}} attribute has the value
-              {{InvalidStateError}}.
+              {{SelfCapturePreferenceEnum/"exclude"}}, return a promise [=reject|rejected=] with a
+              newly [=exception/created=] {{TypeError}}.
             </li>
             <li>
               All other steps associated with {{MediaDevices/getDisplayMedia()}} should now be
