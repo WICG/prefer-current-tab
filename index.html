@@ -64,11 +64,34 @@
           <dfn>preferCurrentTab</dfn>
         </dt>
         <dd>
+          <!-- TODO: Refactor the getDisplayMedia to more easily allow hooking into. -->
           <p>
-            When {{MediaDevices/getDisplayMedia()}} is called, if <code>preferCurrentTab</code> is
-            <code>true</code>, the user agent SHOULD present the current tab as the most prominent
-            option. Otherwise, no such requirement is made.
+            When {{MediaDevices/getDisplayMedia()}} is called with <code>|constraints|</code> (a
+            dictionary), the user agent MUST run the following steps:
           </p>
+          <ol>
+            <li>
+              If <code>|constraints|.preferCurrentTab</code> is <code>false</code>, abort these
+              steps and continue instead with the
+              <a href="https://www.w3.org/TR/screen-capture/#dom-mediadevices-getdisplaymedia"
+                >getDisplayMedia algorithm</a
+              >.
+            </li>
+            <li>
+              If <code>|constraints|.</code>{{DisplayMediaStreamOptions/selfBrowserSurface}} is
+              {{SelfCapturePreferenceEnum/"exclude"}}, return a promise [=reject|rejected=] with a
+              newly [=exception/created=] {{TypeError}}.
+            </li>
+            <li>
+              The rest of the
+              <a href="https://www.w3.org/TR/screen-capture/#dom-mediadevices-getdisplaymedia"
+                >getDisplayMedia algorithm</a
+              >
+              should now be executed, with one change - if the algorithm's execution reaches the
+              step where the user agent asks the user to choose a display surface to capture, then
+              the user agent SHOULD present the current tab as the most prominent option.
+            </li>
+          </ol>
         </dd>
       </dl>
     </section>
