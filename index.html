@@ -35,33 +35,21 @@
       </p>
       <p>
         In such a case, there is only one capture-source that makes sense - the current tab. An API
-        is required that only offers the current tab. Such an API is currently in the works - see
-        [[mediacapture-viewport]], which introduces
-        <a data-cite="mediacapture-viewport/#dom-mediadevices-getviewportmedia">getViewportMedia</a
-        >. The benefit of
-        <a data-cite="mediacapture-viewport/#dom-mediadevices-getviewportmedia">getViewportMedia</a>
-        is that it will offer the user a confirmation-only dialog. The drawbacks are the long time
-        until this API is be standardized, implemented, and until the security mechanisms it
-        requires become widely adopted.
+        is required that only offers the current tab. Such an API is currently in the works, and its
+        tentative name is <code>getViewportMedia</code>. The main benefit of
+        <code>getViewportMedia</code> is that it will offer the user a confirmation-only dialog. The
+        drawbacks are the long time until this API is be standardized, implemented, and until the
+        security mechanisms it requires are widely adopted.
       </p>
       <p>
-        We introduce a simpler mechanism that can act as a stopgap measure until
-        <a data-cite="mediacapture-viewport/#dom-mediadevices-getviewportmedia">getViewportMedia</a>
-        is standardized, implemented and adopted by the Web. This mechanism is a dictionary member
-        that indicates to the user agent that the application prefers the current tab. The user
-        agent can then choose between:
-      </p>
-      <ul>
-        <li>
-          Showing the user a dialog that complies with all of the requirements placed on
-          <a data-cite="SCREEN-CAPTURE#dom-mediadevices-getdisplaymedia">getDisplayMedia</a>,
-          offering all possible sources to the user, but the current tab is presented as the most
-          prominent option.
-        </li>
-        <li>Showing the user a dialog that only offers the option of capturing the current tab.</li>
-      </ul>
-      <p>
-        In either case, this API is meant to ultimately be replaced by [[mediacapture-viewport]].
+        We propose a simpler mechanism that can act as a stopgap measure until
+        <code>getViewportMedia</code> is standardized, implemented and adopted by the Web. This
+        mechanism is a dictionary member that indicates to the user agent that the application
+        prefers the current tab. The user agent then still shows the user a dialog that complies
+        with all of the requirements placed on
+        <a data-cite="SCREEN-CAPTURE#dom-mediadevices-getdisplaymedia">getDisplayMedia</a>, by
+        offering all possible sources to the user, but the current tab is presented as the most
+        prominent option.
       </p>
     </section>
     <section id="prefer-current-tab">
@@ -76,6 +64,7 @@
           <dfn>preferCurrentTab</dfn>
         </dt>
         <dd>
+          <!-- TODO: Refactor the getDisplayMedia to more easily allow hooking into. -->
           <p>
             When {{MediaDevices/getDisplayMedia()}} is called with <code>|constraints|</code> (a
             dictionary), the user agent MUST run the following steps:
@@ -100,15 +89,7 @@
               >
               should now be executed, with one change - if the algorithm's execution reaches the
               step where the user agent asks the user to choose a display surface to capture, then
-              the user agent SHOULD either:
-              <ol>
-                <li>Present the current tab as the most prominent option.</li>
-                <li>
-                  Present the current tab as the only option. In this case, the user agent MUST
-                  mitigate against clickjacking, for example by introducing a delay until user
-                  interaction may allow the capture to start.
-                </li>
-              </ol>
+              the user agent SHOULD present the current tab as the most prominent option.
             </li>
           </ol>
         </dd>
