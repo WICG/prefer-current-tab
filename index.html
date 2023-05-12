@@ -35,21 +35,25 @@
       </p>
       <p>
         In such a case, there is only one capture-source that makes sense - the current tab. An API
-        is required that only offers the current tab. Such an API is currently in the works, and its
-        tentative name is <code>getViewportMedia</code>. The main benefit of
-        <code>getViewportMedia</code> is that it will offer the user a confirmation-only dialog. The
-        drawbacks are the long time until this API is be standardized, implemented, and until the
-        security mechanisms it requires are widely adopted.
+        is required that only offers the current tab. Such an API is currently in the works - see
+        [[mediacapture-viewport]], which introduces
+        <a data-cite="mediacapture-viewport/#dom-mediadevices-getviewportmedia">getViewportMedia</a
+        >. The benefit of
+        <a data-cite="mediacapture-viewport/#dom-mediadevices-getviewportmedia">getViewportMedia</a>
+        is that it will offer the user a confirmation-only dialog. The drawbacks are the long time
+        until this API is be standardized, implemented, and until the security mechanisms it
+        requires become widely adopted.
       </p>
       <p>
-        We propose a simpler mechanism that can act as a stopgap measure until
-        <code>getViewportMedia</code> is standardized, implemented and adopted by the Web. This
-        mechanism is a dictionary member that indicates to the user agent that the application
-        prefers the current tab. The user agent then still shows the user a dialog that complies
-        with all of the requirements placed on
-        <a data-cite="SCREEN-CAPTURE#dom-mediadevices-getdisplaymedia">getDisplayMedia</a>, by
-        offering all possible sources to the user, but the current tab is presented as the most
-        prominent option.
+        We introduce a simpler mechanism that can act as a stopgap measure until
+        <a data-cite="mediacapture-viewport/#dom-mediadevices-getviewportmedia">getViewportMedia</a>
+        is standardized, implemented and adopted by the Web. This mechanism is a dictionary member
+        that indicates to the user agent that the application prefers the current tab. The user
+        agent can then take that preference into consideration when representing the request to the
+        user.
+      </p>
+      <p>
+        In either case, this API is meant to ultimately be replaced by [[mediacapture-viewport]].
       </p>
     </section>
     <section id="prefer-current-tab">
@@ -64,7 +68,6 @@
           <dfn>preferCurrentTab</dfn>
         </dt>
         <dd>
-          <!-- TODO: Refactor the getDisplayMedia to more easily allow hooking into. -->
           <p>
             When {{MediaDevices/getDisplayMedia()}} is called with <code>|constraints|</code> (a
             dictionary), the user agent MUST run the following steps:
@@ -89,8 +92,19 @@
               >
               should now be executed, with one change - if the algorithm's execution reaches the
               step where the user agent asks the user to choose a display surface to capture, then
-              the user agent SHOULD present the current tab as the most prominent option.
+              the user agent SHOULD take the applications's preference for the current tab into
+              account, making it the most prominent of any option presented. User agents MAY rely on
+              this preference to limit the set of options presented to the user.
             </li>
+            <div class="note">
+              <p>
+                This carve-out is an intentional violation of [[SCREEN-CAPTURE]]'s requirement that
+                "the getDisplayMedia API does not permit the use of constraints to narrow the set of
+                options presented." This carve-out does not obviate user agents' duty to ensure
+                active user consent, for example by mitigating against inadvertent sharing
+                (clickjacking, etc.).
+              </p>
+            </div>
           </ol>
         </dd>
       </dl>
