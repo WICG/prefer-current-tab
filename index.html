@@ -82,29 +82,50 @@
             </li>
             <li>
               If <code>|constraints|.</code>{{DisplayMediaStreamOptions/selfBrowserSurface}} is
-              {{SelfCapturePreferenceEnum/"exclude"}}, return a promise [=reject|rejected=] with a
-              newly [=exception/created=] {{TypeError}}.
+              {{SelfCapturePreferenceEnum/"exclude"}}, return a {{Promise}} [=reject|rejected=] with
+              a newly [=exception/created=] {{TypeError}}.
             </li>
             <li>
-              The rest of the
-              <a href="https://www.w3.org/TR/screen-capture/#dom-mediadevices-getdisplaymedia"
-                >getDisplayMedia algorithm</a
-              >
-              should now be executed, with one change - if the algorithm's execution reaches the
-              step where the user agent asks the user to choose a display surface to capture, then
-              the user agent SHOULD take the applications's preference for the current tab into
-              account, making it the most prominent of any option presented. User agents MAY rely on
-              this preference to limit the set of options presented to the user.
-            </li>
-            <div class="note">
               <p>
-                This carve-out is an intentional violation of [[SCREEN-CAPTURE]]'s requirement that
-                "the getDisplayMedia API does not permit the use of constraints to narrow the set of
-                options presented." This carve-out does not obviate user agents' duty to ensure
-                active user consent, for example by mitigating against inadvertent sharing
-                (clickjacking, etc.).
+                The rest of the
+                <a href="https://www.w3.org/TR/screen-capture/#dom-mediadevices-getdisplaymedia"
+                  >getDisplayMedia algorithm</a
+                >
+                should now be executed with the following changes:
               </p>
-            </div>
+            </li>
+            <ol>
+              <li>
+                <p>
+                  If the algorithm's execution reaches the step where the user agent asks the user
+                  to choose a display surface to capture, then the user agent SHOULD take the
+                  applications's preference for the current tab into account, making it the most
+                  prominent of any option presented. User agents MAY rely on this preference to
+                  limit the set of options presented to the user.
+                </p>
+                <div class="note">
+                  <p>
+                    This carve-out is an intentional violation of [[SCREEN-CAPTURE]]'s requirement
+                    that "the getDisplayMedia API does not permit the use of constraints to narrow
+                    the set of options presented." This carve-out does not obviate user agents' duty
+                    to ensure active user consent, for example by mitigating against inadvertent
+                    sharing (clickjacking, etc.).
+                  </p>
+                </div>
+              </li>
+              <li>
+                <p>
+                  Let |p| be {{Promise}} returned by the
+                  <a href="https://www.w3.org/TR/screen-capture/#dom-mediadevices-getdisplaymedia"
+                    >getDisplayMedia algorithm</a
+                  >. If |p| is resolved, then let |stream| be the {{MediaStream}} it resolves to,
+                  and let |videoTrack| be the single {{MediaStreamTrack}} in |stream|'s [=track
+                  set=] whose {{MediaStreamTrack/kind}} is equal to
+                  <a href="https://www.w3.org/TR/mediacapture-streams/#dfn-video">"video"</a>. Set
+                  |p|.{{MediaStreamTrack/[[Restrictable]]}} to <code>true</code>.
+                </p>
+              </li>
+            </ol>
           </ol>
         </dd>
       </dl>
